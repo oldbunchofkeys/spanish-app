@@ -4,137 +4,34 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/style.css">
   <title>Spanish App</title>
 </head>
-<style>
-  * {
-    margin: 0;
-    box-sizing: border-box;
-  }
 
-  .flexbox, .card, .spanish, .english {
-    border: 1px solid black;
-  }
-  .flexbox {
-    display: flex;
-  }
-
-</style>
 <body>
-  <form id="form" action="">
-    <input id="form-spanish-word" type="text">
-    <label for="form-spanish-word">Spanish Word</label> <br>
-    <input id="form-english-word" type="text">
-    <label for="form-english-word">English Word</label> <br>
-    <input type="submit" value="submit">
-  </form>
-  <button id="clear-data">clear data</button>
-  <button id="get-data">get data</button>
-  <div class="flexbox">
-    <div class="card">
-      <div class="spanish">spanish</div>
-      <div class="english">english</div>
-    </div>
-    <div id="container" class="flexbox">
-      
+  <div class="container">
+    <h1>Spanish Flashcards</h1>
+    <form id="form" action="">
+      <input id="form-spanish-word" type="text">
+      <label for="form-spanish-word">Spanish Word</label> <br>
+      <p id="spanish-validation-message"></p>
+      <input id="form-english-word" type="text">
+      <label for="form-english-word">English Word</label> <br>
+      <p id="english-validation-message"></p>
+      <input id="form-submit" type="submit" value="submit">
+    </form>
+    <div class="data-container">
+      <div class="flexbox card-container">
+        <div class="card">
+          <div class="spanish">spanish</div>
+          <div class="english">english</div>
+        </div>
+        <div id="container" class="flexbox"></div>
+      </div>
+      <button id="get-data">get data</button>
+      <button id="clear-data">clear data</button>
     </div>
   </div>
-  <script>
-
-    // variables
-    var cardList = cardList || [];
-    const form = document.querySelector('#form');
-    const clearDataButton = document.querySelector('#clear-data');
-    const getDataButton = document.querySelector('#get-data');
-    const container = document.querySelector('#container');
-    const inputSpanishWord = document.querySelector('#form-spanish-word');
-    const inputEnglishWord = document.querySelector('#form-english-word');
-    let cardListResponseVariable = [];
-    let card = {};
-
-    // event listeners
-    function formSubmit() {
-      form.addEventListener('submit', (event) => {
-        preventReloadOnFormSubmit();
-        createCardObject();
-        pushCardIntoArray();
-        setArrayInLocalStorage();
-        clearFormInputValues();
-      }); 
-    }
-    function clearUserData() {
-      clearDataButton.addEventListener('click', (event) => {
-        clearDataCardList();
-        clearDataLocalStorage();
-        deleteHTMLFromData();
-      });
-    }
-    function getUserData() {
-      getDataButton.addEventListener('click', (event) => {
-        deleteHTMLFromData();
-        makeHTMLFromData();
-      });
-    }
-
-    // function calls for event listeners
-    formSubmit();
-    clearUserData();
-    getUserData();
-
-    // functions
-    function createCardObject() {
-      card = {
-        spanishWord: inputSpanishWord.value,
-        englishWord: inputEnglishWord.value
-      };
-    }
-    function setArrayInLocalStorage() {
-      const cardListString = JSON.stringify(cardList);
-      localStorage.setItem('data', cardListString);
-    }
-    function getArrayFromLocalStorage() {
-      const cardListResponseString = localStorage.getItem('data');
-      cardListResponseVariable = JSON.parse(cardListResponseString);
-    }
-    function makeHTMLFromData() {
-      getArrayFromLocalStorage();
-      if (cardListResponseVariable !== null) {
-        cardListResponseVariable.forEach(function(item) {
-          const cardDiv = document.createElement('div');
-          cardDiv.classList.add('card', 'javascript');
-          cardDiv.innerHTML = `
-            <div class="spanish">${item.spanishWord}</div>
-            <div class="english">${item.englishWord}</div>
-          `;
-          container.append(cardDiv);
-        })
-      } else {
-        alert('no data! please input some words');
-      }
-      ;
-    }
-    function deleteHTMLFromData() {
-      const divsToDelete = document.querySelectorAll('.javascript');
-      divsToDelete.forEach(function(item){
-        item.remove();
-      });
-    }
-    function clearFormInputValues() {
-      inputSpanishWord.value = '';
-      inputEnglishWord.value = '';
-    }
-    function preventReloadOnFormSubmit() {
-      event.preventDefault();
-    }
-    function pushCardIntoArray() {
-      cardList.push(card);
-    }
-    function clearDataLocalStorage() {
-      localStorage.clear();
-    }
-    function clearDataCardList() {
-      cardList = [];
-    }
-  </script>
+  <script src="/index.js"></script>
 </body>
 </html>
