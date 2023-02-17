@@ -1,0 +1,37 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+h1 {
+  margin: 10px 0;
+  text-align: center;
+}
+p {
+  height: 16px;
+  margin: 5px;
+}
+.container {
+  padding: 30px;
+}
+.data-container {
+  margin: 20px 0;
+}
+.flexbox, .card, .spanish, .english {
+  border: 1px solid black;
+}
+.flexbox {
+  display: flex;
+}
+.card-container {
+  margin: 15px 0;
+}
+.spanish, .english {
+  padding: 10px;
+}
+.card {
+  margin: 5px;
+}
+#container.flexbox {
+  border: none;
+}
