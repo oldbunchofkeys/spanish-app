@@ -9,7 +9,7 @@ const inputSpanishWord = document.querySelector('#form-spanish-word');
 const inputEnglishWord = document.querySelector('#form-english-word');
 const spanishValidationMessage = document.querySelector('#spanish-validation-message');
 const englishValidationMessage = document.querySelector('#english-validation-message');
-var cardList = [];
+let cardList = [];
 let cardListResponseVariable = [];
 let card = {};
 
